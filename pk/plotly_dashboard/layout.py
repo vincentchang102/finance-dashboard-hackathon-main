@@ -12,7 +12,9 @@ html_layout = """
         <a href="/">Home</a>
         <a href="/account">Account</a>
         <a class="active" href="/dashboard/">Dashboard</a>
-        <a href="/logout">Log out</a>
+         <div class="navbar-topright">
+            <a href="{{ url_for('logout')}}">Log out</a> 
+        </div>
     </div>
     <div class="main">
         {%app_entry%}
