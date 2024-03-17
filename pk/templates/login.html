@@ -34,6 +34,11 @@
                         {{ form.submit (class="btn") }}
                 </div>
             </form>
+            <div>
+                <a href="{{ url_for('reset_request')}}" style="font: 14px Arial;">
+                    Forgot Password?
+                </a>
+            </div>
             <a href="{{ url_for('register')}}" style="font: 14px Arial;">
                 Click here to register for an account
             </a>
