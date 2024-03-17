@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="style\stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
 </head>
 </html>
 
@@ -13,38 +13,25 @@
             <h1 id="login-title">Finance Dashboard</h1>
             <h3>Please Login</h3>
             <form method="POST" action="">
-                <label for="username" class="username-label">
-                    {{ form.username.label(class="form-control-label") }}
-                        {% if form.username.errors %}
-                            {{ form.username(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
-                                    <span> {{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.username(class="form-control form-control-lg") }}
-                        {% endif %}
-                </label>
-                <label for="password" class="password-label">
-                    {{ form.password.label(class="form-control-label") }}
-                        {% if form.password.errors %}
-                            {{ form.password(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.password.errors %}
-                                    <span> {{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.password(class="form-control form-control-lg") }}
-                        {% endif %}
-                        <div class="form-check">
-                        {{ form.remember(class="form-check-input")}}
-                        {{ form.remember.label(class="form-check-label")}}
-                    </div>
-                </label>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.username.label (class="username-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="username", autocomplete="off") }}
+                    {% else %}
+                        {{ form.username(class="username", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                <div>
+                    {{ form.password.label (class="password-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password (class="password") }}
+                    {% else %}
+                        {{ form.password (class="password") }}
+                    {% endif %}
+                </div>
                 <div class="wrap">
-                        {{ form.submit(class="btn btn-outline-info ")}}
+                        {{ form.submit (class="btn") }}
                 </div>
             </form>
             <a href="{{ url_for('register')}}" style="font: 14px Arial;">

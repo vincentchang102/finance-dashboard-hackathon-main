@@ -1,18 +1,24 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, redirect, request
 from pk import app, db, bcrypt
 from pk.forms import RegistrationForm, LoginForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
+@app.route("/home")
+@login_required
 def home():
     return render_template('home.html')
+
 @app.route("/dashboard")
+@login_required
 def dashboard():
     return render_template('dashboard.html')
-@app.route("/about")
-def about():
-    return render_template('about.html')
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template('account.html', title="Account")
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -33,19 +39,20 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
+        print(User.query.filter_by(username=form.username.data).first())
         user = User.query.filter_by(username=form.username.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
-    return render_template('login.html', title='Login', form=form)
+        if user:
+            print("pass")
+            if bcrypt.check_password_hash(user.password, form.password.data):
+            # login_user(user, remember=form.remember.data)
+                login_user(user)
+                next_page = request.args.get('next')
+                return redirect(next_page) if next_page else redirect(url_for('home'))
+    else:
+        print("Fail")
+        return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
-@app.route("/account")
-@login_required
-def account():
-    return render_template('account.html',title='Account')
