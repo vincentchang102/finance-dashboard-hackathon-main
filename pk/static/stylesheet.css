@@ -1,0 +1,99 @@
+body{
+    margin: 0;
+    min-height: 100vh;
+}
+
+.login-page{
+    background-color: #D9D9D9;
+    align-items: center;
+    display: flex;
+    font-family: Arial;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-module{
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 0 10px gray;
+    width: 500px;
+    padding: 10px 20px;
+}
+
+#login-title{
+    color: #002060;
+}
+
+.username-label, .password-label{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#username, #password{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #D9D9D9;
+    padding: 10px;
+}
+
+.btn{
+    border-radius: 5px;
+    border: 1px solid #D9D9D9;
+    background-color: #002060;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    margin-top: 30px;
+    padding: 16px;
+    background-color: #D9D9D9;
+    min-height: 100vh;
+}
+
+.navbar{
+    text-align: center;
+    position: fixed;
+    top: 0;
+    background-color: #002060;
+    overflow: hidden;
+    width: 100%;
+}
+
+.navbar a{
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font: 22px Arial;
+    font-weight: bold;
+}
+
+.navbar a:hover{
+    background-color: white;
+    color:#002060;
+}
+
+.navbar a.active{
+    background-color: white;
+    color:#002060;
+}

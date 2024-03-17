@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="style\stylesheet.css">
+</head>
+</html>
+
+<body>
+    <div class="login-page">
+        <div class="login-module">
+            <h1 id="login-title">Finance Dashboard</h1>
+            <h3>Please Login</h3>
+            <form method="POST" action="">
+                <label for="username" class="username-label">
+                    {{ form.username.label(class="form-control-label") }}
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                        {% endif %}
+                </label>
+                <label for="password" class="password-label">
+                    {{ form.password.label(class="form-control-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                        {% endif %}
+                        <div class="form-check">
+                        {{ form.remember(class="form-check-input")}}
+                        {{ form.remember.label(class="form-check-label")}}
+                    </div>
+                </label>
+                <div class="wrap">
+                        {{ form.submit(class="btn btn-outline-info ")}}
+                </div>
+            </form>
+            <a href="{{ url_for('register')}}" style="font: 14px Arial;">
+                Click here to register for an account
+            </a>
+        </div>
+    </div>
+</body>
