@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from pk.plotly_dashboard import create_dash
 
 
 app = Flask(__name__)
@@ -15,3 +16,5 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
 from pk import routes
+from pk.routes import protect_view
+create_dash(app, protect_view)

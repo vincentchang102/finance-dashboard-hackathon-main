@@ -4,16 +4,18 @@ from pk.forms import RegistrationForm, LoginForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 
+def protect_view(app):
+    for view_function in app.server.view_functions:
+        if view_function.startswith(app.config["routes_pathname_prefix"]):
+            app.server.view_functions[view_function] = login_required(
+                app.server.view_functions[view_function]
+            )
+
 @app.route("/")
 @app.route("/home")
 @login_required
 def home():
     return render_template('home.html')
-
-@app.route("/dashboard")
-@login_required
-def dashboard():
-    return render_template('dashboard.html')
 
 @app.route("/account")
 @login_required

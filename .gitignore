@@ -1,2 +1,7 @@
 pk/__pycache__/
+pk/__pycache__/
+pk/plotly_dashboard/__pycache__/
+pk/plotly_dashboard/components/__pycache__/
+pk/plotly_dashboard/plotly_callbacks/__pycache__/
 venv
+__pycache__/

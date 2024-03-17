@@ -11,7 +11,7 @@
     <div class="navbar">
         <a href="{{ url_for('home')}}">Home</a>
         <a href="{{ url_for('account')}}">Account</a>
-        <a class="active" href="{{ url_for('dashboard')}}">Dashboard</a>
+        <a class="active" href="/dashboard/">Dashboard</a>
         {% if current_user.is_authenticated %}
         <a href="{{ url_for('logout')}}">Log out</a>
         <!-- {% else %}
@@ -20,6 +20,6 @@
         {% endif %}
     </div>
     <div class="main">
-        <h1>Dashboard Content Block</h1>
+        <div src="/dashboard/"></div>
     </div>
 </body>
