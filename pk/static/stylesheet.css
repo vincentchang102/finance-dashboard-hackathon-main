@@ -100,6 +100,9 @@ body{
     color:#002060;
 }
 
+.navbar-topright{
+    float: right;
+}
 
 .wrapper{
     width: 100%;
