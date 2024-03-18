@@ -59,7 +59,7 @@ class ResetPasswordForm(FlaskForm):
 
 class ChangeUsernameForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    submit = SubmitField('Change Name')
+    submit = SubmitField('Change Username')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
