@@ -42,17 +42,18 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        print(User.query.filter_by(username=form.username.data).first())
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-            print("pass")
             if bcrypt.check_password_hash(user.password, form.password.data):
             # login_user(user, remember=form.remember.data)
                 login_user(user)
                 next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('home'))
+            else:
+                return render_template('login.html', title='Login', form=form)
+        else:
+            return render_template('login.html', title='Login', form=form)
     else:
-        print("Fail")
         return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")

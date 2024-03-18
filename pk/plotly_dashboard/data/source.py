@@ -122,7 +122,7 @@ class Stock:
     def build_cash_table(self):
         accounts = ["NetCashProvidedByUsedInOperatingActivities", "PaymentsToAcquirePropertyPlantAndEquipment"]
         queue = deque()
-        times = [2021, 2022, 2023]
+        times = [2021, 2022, 2023, 2024]
         for account in accounts:
             elements = []
             df = self.get_account_fcf(account)
@@ -164,7 +164,7 @@ class Stock:
     def build_cash_table_alt(self):
         accounts = ["NetCashProvidedByUsedInOperatingActivities", "PaymentsToAcquireProductiveAssets"]
         queue = deque()
-        times = [2021, 2022, 2023]
+        times = [2021, 2022, 2023, 2024]
         for account in accounts:
             elements = []
             df = self.get_account_fcf(account)

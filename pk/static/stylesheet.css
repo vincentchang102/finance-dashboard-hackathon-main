@@ -1,7 +1,12 @@
+
 body{
     margin: 0;
     min-height: 100vh;
     background-color: #D9D9D9
+}
+
+.container{
+    width: 100%;
 }
 
 .login-page, .register-page{
@@ -66,18 +71,24 @@ body{
 }
 
 .main{
-    margin-top: 30px;
+    background-color: white;
+    max-width: 115rem;
+    min-height: 100vh;
+    margin: auto;
+    padding-top: 16px;
+}
+
+.dashboard-container{
     padding: 16px;
-    background-color: #D9D9D9;
 }
 
 .navbar{
     text-align: center;
-    position: fixed;
-    top: 0;
     background-color: #002060;
     overflow: hidden;
     width: 100%;
+    max-width: 115rem;
+    margin: auto;
 }
 
 .navbar a{
@@ -110,9 +121,8 @@ body{
 
 .stock-list-container{
     width:33%;
-    margin-top:50px;
-    /* margin-left: 50px; */
-    margin-bottom: 25px;
+    margin-top:15px;
+    margin-left: 50px;
     outline: none;
 }
 
@@ -120,7 +130,6 @@ body{
     font-family: Arial;
     margin-top:50px;
     margin-left: 50px;
-    margin-bottom: 25px;
 }
 
 .chart-container{
@@ -132,4 +141,10 @@ body{
 #income-statement-chart, #cash-flow-chart{
     width: 50%;
     display: block;
+}
+
+.finance-table-container{
+    margin-right: 75px;
+    margin-left: 75px;
+    overflow: auto;
 }

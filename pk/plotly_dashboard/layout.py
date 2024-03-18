@@ -13,7 +13,7 @@ html_layout = """
         <a href="/account">Account</a>
         <a class="active" href="/dashboard/">Dashboard</a>
          <div class="navbar-topright">
-            <a href="{{ url_for('logout')}}">Log out</a> 
+            <a href="/logout">Log out</a> 
         </div>
     </div>
     <div class="main">

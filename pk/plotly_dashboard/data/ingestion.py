@@ -411,18 +411,18 @@ def ingest_data(tickers_list, methods=[BlackBerry, UiPath, CRM, GOOGL, MSFT, AMD
 
     return success, fail
 
-start = timer()
-ingest = ingest_data(tickers_list=tickers)
-end = timer()
-print(end-start)
-print("Success:", ingest[0])
-print("Fail:", ingest[1])
+# start = timer()
+# ingest = ingest_data(tickers_list=tickers)
+# end = timer()
+# print(end-start)
+# print("Success:", ingest[0])
+# print("Fail:", ingest[1])
 
 
 def sec_tickers():
 
     headers = {
-    "User-Agent": "echanx24@gmail.com"
+    "User-Agent": "juggerchan@gmail.com"
     }
 
     url = "https://www.sec.gov/files/company_tickers.json"
@@ -443,4 +443,3 @@ def upload_tickers(data=sec_tickers()):
         cur.executemany("INSERT INTO company VALUES (?, ?, ?, ?)", data)
 
 # upload_tickers()
-    
