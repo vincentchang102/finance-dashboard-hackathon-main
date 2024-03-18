@@ -1,6 +1,6 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request,session
 from pk import app, db, bcrypt, mail
-from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm
+from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ChangeUsernameForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -22,6 +22,7 @@ def home():
 @login_required
 def account():
     return render_template('account.html', title="Account")
+
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -97,3 +98,29 @@ def reset_token(token):
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@app.route("/change_password", methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ResetPasswordForm()
+    id = current_user.id
+    curr_user = User.query.get_or_404(id)
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        curr_user.password = hashed_password
+        db.session.commit()
+        return redirect(url_for('account'))
+    return render_template('reset_password.html', title='Change Password', form=form)
+ 
+@app.route("/change_username", methods=['GET', 'POST'])
+@login_required
+def change_name():
+    form = ChangeUsernameForm()
+    id = current_user.id
+    curr_user = User.query.get_or_404(id)
+    if form.validate_on_submit():
+        curr_user.username = form.username.data
+        db.session.commit()
+        return redirect(url_for('account'))
+    return render_template('reset_username.html', title='Change Username', form=form)
