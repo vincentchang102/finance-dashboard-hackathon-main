@@ -1,5 +1,5 @@
-from flask import render_template, url_for, redirect, request
-from pk import app, db, bcrypt, mail
+from flask import render_template, url_for, redirect, request, session
+from pk import app, db, bcrypt
 from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
@@ -16,7 +16,7 @@ def protect_view(app):
 @app.route("/home")
 @login_required
 def home():
-    return render_template('home.html')
+    return redirect("/home/")
 
 @app.route("/account")
 @login_required
@@ -39,6 +39,7 @@ def register():
 @app.route("/login", methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
+        session["email"] = current_user.email
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -46,6 +47,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
             # login_user(user, remember=form.remember.data)
+                session["email"] = user.email
                 login_user(user)
                 next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('home'))

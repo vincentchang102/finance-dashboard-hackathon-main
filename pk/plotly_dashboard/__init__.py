@@ -13,7 +13,7 @@ def create_dash(server, func):
     ticker = "PEGA"
     data = create_charts(ticker)
 
-    app = Dash(server=server, routes_pathname_prefix="/dashboard/",
+    app = Dash(server=server, routes_pathname_prefix="/home/", update_title=None,
                external_stylesheets=["/static/stylesheet.css"])
     app.index_string = html_layout
 

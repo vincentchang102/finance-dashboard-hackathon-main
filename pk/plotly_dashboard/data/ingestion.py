@@ -411,12 +411,12 @@ def ingest_data(tickers_list, methods=[BlackBerry, UiPath, CRM, GOOGL, MSFT, AMD
 
     return success, fail
 
-# start = timer()
-# ingest = ingest_data(tickers_list=tickers)
-# end = timer()
-# print(end-start)
-# print("Success:", ingest[0])
-# print("Fail:", ingest[1])
+start = timer()
+ingest = ingest_data(tickers_list=tickers)
+end = timer()
+print(end-start)
+print("Success:", ingest[0])
+print("Fail:", ingest[1])
 
 
 def sec_tickers():

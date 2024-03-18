@@ -3,15 +3,16 @@ html_layout = """
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Home</title>
     {%metas%}
     {%css%}
 </head>
+</html>
 
 <body>
     <div class="navbar">
-        <a href="/">Home</a>
+        <a href="/home/">Home</a>
         <a href="/account">Account</a>
-        <a class="active" href="/dashboard/">Dashboard</a>
          <div class="navbar-topright">
             <a href="/logout">Log out</a> 
         </div>
@@ -25,5 +26,4 @@ html_layout = """
         {%renderer%}
     </footer>
 </body>
-</html>
 """
