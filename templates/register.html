@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
+</head>
+</html>
+
+<body>
+    <div class="register-page">
+        <div class="register-module">
+            <h1 class="register-title">Register a New Account</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.username.label(class="username-label") }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="username", autocomplete="off") }}
+                    {% else %}
+                        {{ form.username(class="username", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                    {{ form.email.label(class="username-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="username", autocomplete="off") }}
+                    {% else %}
+                        {{ form.email(class="username", autocomplete="off") }}
+                    {% endif %}
+                <div >
+                    {{ form.password.label(class="password-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="password", autocomplete="off") }}
+                    {% else %}
+                        {{ form.password(class="password", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                <div>
+                    {{ form.confirm_password.label(class="password-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="password", autocomplete="off") }}
+                    {% else %}
+                        {{ form.confirm_password(class="password", autocomplete="off") }}
+                    {% endif %}
+                </div>
+                <div class="wrapper">
+                    {{ form.submit(class="btn")}}
+                </div>
+            </form>
+            <p>Already Have An Account? <a href=" {{ url_for('login')}}">Sign In </a>     </p>
+        </div>
+    </div>
+</body>
