@@ -115,8 +115,9 @@ class Stock:
         df = df.filter((pl.col("form")=="10-K") | (pl.col("form")=="10-Q"))
         df = df.unique(subset=["end"])
         df = df.with_columns(pl.col("end").str.to_date("%Y-%m-%d"))
+        df = df.with_columns(pl.col("start").str.to_date("%Y-%m-%d"))
         df = df.sort(pl.col("end"), descending=False)
-        df = df.with_columns(year=pl.col("end").dt.year())
+        df = df.with_columns(year=pl.col("start").dt.year())
         df = df.select(["start", "end", "year", "fy", "fp", "form", "val"])
         return df
     
@@ -151,17 +152,6 @@ class Stock:
                            "PaymentsToAcquirePropertyPlantAndEquipment_recalc", "freeCashFlow", "ticker"]))
         # return df3
         return df3.rows()
-    
-    def get_account_fcf(self, account):
-        data = self.company_facts()
-        df = pl.DataFrame(data["facts"]["us-gaap"][account]["units"]["USD"])
-        df = df.filter((pl.col("form")=="10-K") | (pl.col("form")=="10-Q"))
-        df = df.unique(subset=["end"])
-        df = df.with_columns(pl.col("end").str.to_date("%Y-%m-%d"))
-        df = df.sort(pl.col("end"), descending=False)
-        df = df.with_columns(year=pl.col("end").dt.year())
-        df = df.select(["start", "end", "year", "fy", "fp", "form", "val"])
-        return df
     
     def build_cash_table_alt(self):
         accounts = ["NetCashProvidedByUsedInOperatingActivities", "PaymentsToAcquireProductiveAssets"]

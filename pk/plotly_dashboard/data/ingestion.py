@@ -447,8 +447,6 @@ def upload_tickers(data=sec_tickers()):
 
 # upload_tickers()
         
-# stock = CRM()
-# df = stock.get_account_fcf("NetCashProvidedByUsedInOperatingActivities")
-# df = df.filter(pl.col("fy")==2024)
-# print(df)
-# # print(stock.build_table())
+# stock = CRM(ticker="PEGA")
+# # print(stock.build_cash_table())
+# print(stock.build_cash_table())
