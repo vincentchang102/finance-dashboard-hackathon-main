@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request, session, flash
 from pk import app, db, bcrypt, mail
-from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ResetPasswordForm, ChangeUsernameForm, ChangeUsernameAndPassForm
+from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ChangeUsernameForm, ChangeUsernameAndPassForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -113,7 +113,6 @@ def reset_token(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         user.password = hashed_password
         db.session.commit()
         return redirect(url_for('login'))
