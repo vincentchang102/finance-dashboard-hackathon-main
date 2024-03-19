@@ -2,6 +2,7 @@ import requests
 import polars as pl
 import sqlite3 as sql
 from collections import deque
+import os
 
 class Stock:
 
@@ -12,10 +13,10 @@ class Stock:
     """
 
     headers = {
-    "User-Agent": "juggerchan@gmail.com"
+    "User-Agent": os.getenv("EMAIL_USER")
     }
 
-    connection = sql.connect("pk\plotly_dashboard\data\Financials.db")
+    connection = sql.connect("pk/plotly_dashboard/data/Financials.db")
     cur = connection.cursor()
 
     def __init__(self, ticker):
@@ -148,6 +149,7 @@ class Stock:
                            "NetCashProvidedByUsedInOperatingActivities_recalc",
                            "PaymentsToAcquirePropertyPlantAndEquipment",
                            "PaymentsToAcquirePropertyPlantAndEquipment_recalc", "freeCashFlow", "ticker"]))
+        # return df3
         return df3.rows()
     
     def get_account_fcf(self, account):

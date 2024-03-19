@@ -16,7 +16,7 @@ def get_name(ticker):
 
 def get_data(ticker):
 
-    connection = sql.connect("pk\plotly_dashboard\data\Financials.db")
+    connection = sql.connect("pk/plotly_dashboard/data/Financials.db")
 
     query = """
         SELECT i.date, i.revenue, i.costOfRevenue, i.grossProfit, i.research, i.sga, i.otherOperating, i.operatingExp, i.operatingInc, c.freeCashFlow 

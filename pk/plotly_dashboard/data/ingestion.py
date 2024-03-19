@@ -5,6 +5,7 @@ import pandas as pd
 from collections import deque
 import requests
 import sqlite3 as sql
+import os
 
 class BlackBerry(Stock):
     
@@ -411,18 +412,20 @@ def ingest_data(tickers_list, methods=[BlackBerry, UiPath, CRM, GOOGL, MSFT, AMD
 
     return success, fail
 
-start = timer()
-ingest = ingest_data(tickers_list=tickers)
-end = timer()
-print(end-start)
-print("Success:", ingest[0])
-print("Fail:", ingest[1])
+### data import
+
+# start = timer()
+# ingest = ingest_data(tickers_list=tickers)
+# end = timer()
+# print(end-start)
+# print("Success:", ingest[0])
+# print("Fail:", ingest[1])
 
 
 def sec_tickers():
 
     headers = {
-    "User-Agent": "juggerchan@gmail.com"
+    "User-Agent": os.getenv("EMAIL_USER")
     }
 
     url = "https://www.sec.gov/files/company_tickers.json"
@@ -437,9 +440,15 @@ def sec_tickers():
     return df_tuples
 
 def upload_tickers(data=sec_tickers()):
-    connection = sql.connect("pk\plotly_dashboard\data\Financials.db")
+    connection = sql.connect("pk/plotly_dashboard/data/Financials.db")
     cur = connection.cursor()
     with connection:
         cur.executemany("INSERT INTO company VALUES (?, ?, ?, ?)", data)
 
 # upload_tickers()
+        
+# stock = CRM()
+# df = stock.get_account_fcf("NetCashProvidedByUsedInOperatingActivities")
+# df = df.filter(pl.col("fy")==2024)
+# print(df)
+# # print(stock.build_table())

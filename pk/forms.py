@@ -48,15 +48,6 @@ class ResetPasswordForm(FlaskForm):
                              validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
 
-class ChangeUsernameForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    submit = SubmitField('Change Username')
-
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError('That username is taken. Please choose a different one')
-
 class ChangeUsernameAndPassForm(FlaskForm):
     current_password = PasswordField('Current Password', validators=[DataRequired()])
     new_password = PasswordField('New Password', validators=[DataRequired()])

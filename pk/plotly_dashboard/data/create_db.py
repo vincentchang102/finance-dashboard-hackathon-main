@@ -1,6 +1,6 @@
 import sqlite3 as sql
 
-connection = sql.connect("pk\plotly_dashboard\data\Financials.db")
+connection = sql.connect("pk/plotly_dashboard/data/Financials.db")
 cursor = connection.cursor()
 
 create_ticker_table = """
