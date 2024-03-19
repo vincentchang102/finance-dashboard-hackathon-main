@@ -11,7 +11,7 @@ html_layout = """
 
 <body>
     <div class="navbar">
-        <a href="/home/">Home</a>
+        <a class="active" href=/home/>Home</a>
         <a href="/account">Account</a>
          <div class="navbar-topright">
             <a href="/logout">Log out</a> 

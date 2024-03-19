@@ -67,6 +67,7 @@ def login():
                 session["email"] = user.email
                 login_user(user)
                 next_page = request.args.get('next')
+                flash("Successfully, Logged In!", "success")
                 return redirect(next_page) if next_page else redirect(url_for('home'))
             else:
                 return render_template('login.html', title='Login', form=form)

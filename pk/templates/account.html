@@ -27,7 +27,7 @@
                     <form method="POST" action="">
                         {{ form.hidden_tag() }}
                         <div>
-                            <h1 class="login-title">Current signed in as {{ current_user.username }}</h1>
+                            <h1 class="login-title">Currently signed in as {{ current_user.username }}</h1>
                         </div>
                         <div>
                             {{ form.current_password.label (class="password-label") }}
