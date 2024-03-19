@@ -1,9 +1,10 @@
-from flask import render_template, url_for, redirect, request, session
-from pk import app, db, bcrypt
-from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ResetPasswordForm, ChangeUsernameForm
+from flask import render_template, url_for, redirect, request, session, flash
+from pk import app, db, bcrypt, mail
+from pk.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ResetPasswordForm, ChangeUsernameForm, ChangeUsernameAndPassForm
 from pk.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
+import os
 
 def protect_view(app):
     for view_function in app.server.view_functions:
@@ -18,10 +19,26 @@ def protect_view(app):
 def home():
     return redirect("/home/")
 
-@app.route("/account")
+@app.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
-    return render_template('account.html', title="Account")
+    form = ChangeUsernameAndPassForm()
+    id = current_user.id
+    curr_user = User.query.get_or_404(id)
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(curr_user.password, form.new_password.data):
+            flash("Current Password Cannot Be Resued! Please Try Again.", "danger")
+            return redirect(url_for("account"))
+        if bcrypt.check_password_hash(curr_user.password, form.current_password.data) and form.new_password.data == form.confirm_password.data:
+            hashed_password = bcrypt.generate_password_hash(form.confirm_password.data).decode("utf-8")
+            curr_user.password = hashed_password
+            db.session.commit()
+            flash("Password Successfully Changed!", "success")
+            return redirect(url_for("account"))
+            # return redirect(url_for("account"))
+        flash("Unsuccessful! Please Try Again.", "danger")
+        return redirect(url_for("account"))
+    return render_template('account.html', title="Account", form=form)
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -66,12 +83,14 @@ def logout():
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request',
-                sender='noreply@demo.com', 
+                sender='supersaiyanchan@hotmail.com', 
                 recipients=[user.email])
     msg.body= f'''To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}
 If you didn't make this request then simply ignore this email and no changes will be made.
 '''
+    with mail.connect() as conn:
+        conn.send(msg)
 
 @app.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():

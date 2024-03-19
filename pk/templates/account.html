@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
-</head>
-</html>
+{% extends "layout.html" %}
 
-<body>
+{% block content %}
     <div class="navbar">
         <a href="{{ url_for('home')}}">Home</a>
         <a class="active" href="{{ url_for('account')}}">Account</a>
@@ -16,10 +9,55 @@
         </div>
     </div>
     <div class="main">
-        <h1>{{ current_user.username }}</h1>
-        <div>
-            <a href="{{ url_for('change_name')}}">Change Username</a> 
+        <div class="login-page" style="background-color: white;">
+            <div class="login-module" style="background-color: #f2f2f2;">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="{{ category }}">
+                            {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <!-- <div>
+                    <a href="{{ url_for('change_name')}}" class="">Change Username</a> 
+                </div>
+                <a href="{{ url_for('change_password')}}">Change Password</a>  -->
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <div>
+                            <h1 class="login-title">Current signed in as {{ current_user.username }}</h1>
+                        </div>
+                        <div>
+                            {{ form.current_password.label (class="password-label") }}
+                            {% if form.current_password.errors %}
+                                {{ form.current_password (class="password", autocomplete="off") }}
+                            {% else %}
+                                {{ form.current_password (class="password", autocomplete="off") }}
+                            {% endif %}
+                        </div>
+                        <div>
+                            {{ form.new_password.label (class="password-label") }}
+                            {% if form.new_password.errors %}
+                                {{ form.new_password (class="password", autocomplete="off") }}
+                            {% else %}
+                                {{ form.new_password (class="password", autocomplete="off") }}
+                            {% endif %}
+                        </div>
+                        <div>
+                            {{ form.confirm_password.label (class="password-label") }}
+                            {% if form.confirm_password.errors %}
+                                {{ form.confirm_password (class="password", autocomplete="off") }}
+                            {% else %}
+                                {{ form.confirm_password (class="password", autocomplete="off") }}
+                            {% endif %}
+                        </div>
+                        <div class="wrap">
+                            {{ form.submit (class="btn") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <a href="{{ url_for('change_password')}}">Change Password</a> 
-    </div>
-</body>
+{% endblock content %}

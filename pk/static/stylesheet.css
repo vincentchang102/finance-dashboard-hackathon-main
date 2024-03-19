@@ -148,3 +148,13 @@ body{
     margin-left: 75px;
     overflow: auto;
 }
+
+.success{
+    font-family: Arial;
+    color:#002060
+}
+
+.danger{
+    font-family: Arial;
+    color: red
+}
